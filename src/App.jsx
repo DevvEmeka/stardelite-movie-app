@@ -8,17 +8,22 @@ const API_URL = `http://www.omdbapi.com/?i=tt3896198&apikey=${import.meta.env.VI
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [movieSearch, setMovieSearch] = useState('')
+  const [movieSearch, setMovieSearch] = useState('');
+  const [isLoadingSearch, setIsLoadingSearch] = useState(false); 
+  const [isLoadingApp, setIsLoadingApp] = useState(true);
 
-  // fetche movie data and updates the movie list 
+  // fetches movie data and updates the movie list 
   const searchMovie = async (result) => {
+    if (!result) return; 
+
+    setIsLoadingSearch(true); 
     try {
       const response = await fetch(`${API_URL}&s=${result}`);
       if (!response.ok) {
         throw new Error('Failed to fetch movies');
       }
       const data = await response.json();
-      
+
       // Check if there is a 'Search' property and it's an array
       if (data.Search) {
         setMovies(data.Search);
@@ -28,14 +33,17 @@ function App() {
       }
     } catch (error) {
       console.error('Error:', error);
-      setMovies([]); 
+      setMovies([]);
+    } finally {
+      setIsLoadingSearch(false); // Reset loading state after fetching data
     }
   };
 
   // display movies related to "Avatar" when the component first mounts
   useEffect(() => {
     searchMovie("Avatar");
-  }, []);   
+    setIsLoadingApp(false); 
+  }, []);
 
   return (
     <div className="app">
@@ -56,8 +64,10 @@ function App() {
           />
         </section>
 
-        {/* conditionally renders a list of movies using the MoviePreview component */}
-        {movies?.length > 0 ? (
+        {/* Loading state during the app mount or search */}
+        {isLoadingApp || isLoadingSearch ? (
+          <div className="loader">LOADING...</div>
+        ) : movies?.length > 0 ? (
           <div className="wrap">
             {movies.map((movie) => (
               <MoviePreview key={movie.imdbID} movie={movie} />
