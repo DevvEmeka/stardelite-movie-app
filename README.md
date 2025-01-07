@@ -3,102 +3,104 @@
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 
-Setup Instructions
+## Setup Instructions
 
-Follow these steps to set up and run the project:
+### **Follow these steps to set up and run the project:**
 
 - Create a react app using vite
 
-npm create vite@latest
+> npm create vite@latest
 
 - Install Dependencies
 
 Ensure you have Node.js installed. Run the following command to install the required packages:
 
-npm install
+> npm install
 
 - Start the Development Server
 
 To run the app locally, use the command:
-npm run dev
+
+> npm run dev
+
 Open your browser and navigate to http://localhost:5174/
 
 
 
-Features List
+## Features List
 
-Movie Search
+### Movie Search
 
-Users can search for movies by entering a keyword in the search bar.
+- Users can search for movies by entering a keyword in the search bar.
 
-Fetches and displays results dynamically from the OMDb API.
+- Fetches and displays results dynamically from the OMDb API.
 
-Responsive Design
+## Responsive Design
 
-Fully responsive layout built using modern CSS and flexible design principles.
+- Fully responsive layout built using modern CSS and flexible design principles.
 
-Movie Preview
+### Movie Preview
 
-Displays a movie card showing:
+- Displays a movie card showing:
 
-Year of release
+    - Year of release
 
-Poster image
+    - Poster image
 
-Type (e.g., Movie, Series)
+    - Type (e.g., Movie, Series)
 
-Title
+    - Title
 
-Poster Fallback
+    - Poster Fallback
 
-If the movie poster is unavailable, a placeholder image is shown.
+    - If the movie poster is unavailable, a placeholder image is shown.
 
-Error Handling
+### Error Handling
 
-Displays a friendly message (e.g., "No Movies Found") if no results are returned or an API error occurs.
+- Displays a friendly message (e.g., "No Movies Found") if no results are returned or an API error occurs.
 
-Default Movie Search
+### Default Movie Search
 
-Shows a list of movies (e.g., "Avatar") on the initial page load.
+- Shows a list of movies (e.g., "Avatar") on the initial page load.
 
 
 
-API Key Setup Guide
+## API Key Setup Guide
 
 The app uses the OMDb API, which requires an API key. Follow these steps to set it up:
 
-Sign Up for an OMDb API Key
+1. Sign Up for an OMDb API Key
 
-Visit the OMDb API website: http://www.omdbapi.com/.
+- Visit the OMDb API website: http://www.omdbapi.com/.
 
-Click on "Sign Up" and create an account.
+- Click on "Sign Up" and create an account.
 
-After signing up, you will receive a unique API key.
+- After signing up, you will receive a unique API key.
 
-Add the API Key to the Project
+- Add the API Key to the Project
 
-Locate the API_URL variable in your project code:   
+2. Locate the API_URL variable in your project code:   
 
-const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=YOUR_API_KEY";
+- const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=YOUR_API_KEY";
 
-Replace YOUR_API_KEY with the key provided by OMDb.
+- Replace YOUR_API_KEY with the key provided by OMDb.
 
-Secure the API Key (Optional)
+- Secure the API Key (Optional)
 
-Use environment variables to store the API key securely:
+3. Use environment variables to store the API key securely:
 
-Create a .env file in the root of your project.
+- Create a .env file in the root of your project.
 
-Add the following:
+4. Add the following:
 
-REACT_APP_API_KEY=your-omdb-api-key
+- REACT_APP_API_KEY=your-omdb-api-key
 
-Update the API_URL in your code:
+5. Update the API_URL in your code:
 
-const API_URL = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
+- const API_URL = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
 
-Restart your development server after making changes to .env.
+- Restart your development server after making changes to .env.
 
-Test the API Key
+- Test the API Key
 
-Run the app and search for movies to ensure the API key works correctly.
+- Run the app and search for movies to ensure the API key works correctly.
