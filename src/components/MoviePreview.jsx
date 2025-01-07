@@ -20,6 +20,7 @@ export default function MoviePreview({ movie }) {
       <div>
         <span>{movie.Type}</span>
         <h3>{movie.Title}</h3>
+        <span>{movie.Year}</span>
       </div>
     </section>
   );

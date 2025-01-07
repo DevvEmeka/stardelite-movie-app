@@ -4,7 +4,7 @@ import MoviePreview from "./components/MoviePreview";
 import './App.css'
 
 // defines the base URL for the OMDb API
-const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=a4c0a4fb";
+const API_URL = `http://www.omdbapi.com/?i=tt3896198&apikey=${import.meta.env.VITE_OMDB_API_KEY}`;
 
 function App() {
   const [movies, setMovies] = useState([]);
