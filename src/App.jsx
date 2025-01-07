@@ -3,20 +3,14 @@ import { LuSearch } from "react-icons/lu";
 import MoviePreview from "./components/MoviePreview";
 import './App.css'
 
-// Defining the movie API
+// defines the base URL for the OMDb API
 const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=a4c0a4fb";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [movieSearch, setMovieSearch] = useState('')
 
-  // const searchMovie = async (result) => {
-  //   const response = await fetch(`${API_URL}&s=${result}`);
-  //   const data = await response.json();
-
-  //   setMovies(data.Search);
-  // };
-
+  // fetche movie data and updates the movie list 
   const searchMovie = async (result) => {
     try {
       const response = await fetch(`${API_URL}&s=${result}`);
@@ -30,19 +24,19 @@ function App() {
         setMovies(data.Search);
       } else {
         console.error('No movies found');
-        setMovies([]); // If no movies are found, clear the movies state
+        setMovies([]);
       }
     } catch (error) {
       console.error('Error:', error);
-      setMovies([]); // Clear movies if there's an error
+      setMovies([]); 
     }
   };
 
+  // display movies related to "Avatar" when the component first mounts
   useEffect(() => {
     searchMovie("Avatar");
   }, []);   
 
-  const searchIcon = <LuSearch />;
   return (
     <div className="app">
       <main className="app">
@@ -56,20 +50,21 @@ function App() {
             onChange={(e) => setMovieSearch(e.target.value)}
           />
           <LuSearch
-            className="pointer"
+            className="icon"
             alt="search"
             onClick={() => searchMovie(movieSearch)}
           />
         </section>
 
+        {/* conditionally renders a list of movies using the MoviePreview component */}
         {movies?.length > 0 ? (
-          <div className="container">
+          <div className="wrap">
             {movies.map((movie) => (
               <MoviePreview key={movie.imdbID} movie={movie} />
             ))}
           </div>
         ) : (
-          <div className="empty">
+          <div className="no-movie">
             <h2>No Movies Found</h2>
           </div>
         )}

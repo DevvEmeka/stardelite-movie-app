@@ -1,5 +1,6 @@
 import React from "react";
 
+// displays a movie's year, poster, type, and title 
 export default function MoviePreview({ movie }) {
   return (
     <section className="movie">
