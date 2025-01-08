@@ -4,7 +4,7 @@ import MoviePreview from "./components/MoviePreview";
 import "./App.css";
 
 // defines the base URL for the OMDb API
-const API_URL = `http://www.omdbapi.com/?i=tt3896198&apikey=${
+const API_URL = `https://www.omdbapi.com/?i=tt3896198&apikey=${
   import.meta.env.VITE_OMDB_API_KEY
 }`;
 
@@ -20,7 +20,7 @@ function App() {
     try {
       const response = await fetch(`${API_URL}&s=${result}`);
       const data = await response.json();
-
+      console.log("API Response:", data);
       setMovies(data.Search);
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -37,7 +37,7 @@ function App() {
       } catch (error) {
         console.error("Error during app initialization:", error);
       } finally {
-        setIsLoadingApp(false); 
+        setIsLoadingApp(false);
       }
     };
 
