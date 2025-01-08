@@ -1,48 +1,47 @@
 import { useEffect, useState } from "react";
 import { LuSearch } from "react-icons/lu";
 import MoviePreview from "./components/MoviePreview";
-import './App.css'
+import "./App.css";
 
 // defines the base URL for the OMDb API
-const API_URL = `http://www.omdbapi.com/?i=tt3896198&apikey=${import.meta.env.VITE_OMDB_API_KEY}`;
+const API_URL = `http://www.omdbapi.com/?i=tt3896198&apikey=${
+  import.meta.env.VITE_OMDB_API_KEY
+}`;
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [movieSearch, setMovieSearch] = useState('');
-  const [isLoadingSearch, setIsLoadingSearch] = useState(false); 
+  const [movieSearch, setMovieSearch] = useState("");
+  const [isLoadingSearch, setIsLoadingSearch] = useState(false);
   const [isLoadingApp, setIsLoadingApp] = useState(true);
 
-  // fetches movie data and updates the movie list 
+  // fetches movie data and updates the movie list
   const searchMovie = async (result) => {
-    if (!result) return; 
-
-    setIsLoadingSearch(true); 
+    setIsLoadingSearch(true);
     try {
       const response = await fetch(`${API_URL}&s=${result}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch movies');
-      }
       const data = await response.json();
 
-      // Check if there is a 'Search' property and it's an array
-      if (data.Search) {
-        setMovies(data.Search);
-      } else {
-        console.error('No movies found');
-        setMovies([]);
-      }
+      setMovies(data.Search);
     } catch (error) {
-      console.error('Error:', error);
-      setMovies([]);
+      console.error("Error fetching movies:", error);
     } finally {
-      setIsLoadingSearch(false); // Reset loading state after fetching data
+      setIsLoadingSearch(false);
     }
   };
 
   // display movies related to "Avatar" when the component first mounts
   useEffect(() => {
-    searchMovie("Avatar");
-    setIsLoadingApp(false); 
+    const fetchInitialMovies = async () => {
+      try {
+        await searchMovie("Avatar");
+      } catch (error) {
+        console.error("Error during app initialization:", error);
+      } finally {
+        setIsLoadingApp(false); 
+      }
+    };
+
+    fetchInitialMovies();
   }, []);
 
   return (
