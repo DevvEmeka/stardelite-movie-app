@@ -20,7 +20,6 @@ function App() {
     try {
       const response = await fetch(`${API_URL}&s=${result}`);
       const data = await response.json();
-      console.log("API Response:", data);
       setMovies(data.Search);
     } catch (error) {
       console.error("Error fetching movies:", error);
