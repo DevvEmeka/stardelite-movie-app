@@ -73,7 +73,7 @@ h2 {
 .no-movie {
   width: 100px;
   margin-top: 3rem;
-
+  white-space: nowrap;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -181,16 +181,6 @@ h2 {
   color: #3498db;
 }
 
-/* .wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.no-movie {
-  text-align: center;
-} */
 
 @media screen and (max-width: 600px) {
   .app {
